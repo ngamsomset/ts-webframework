@@ -1,4 +1,5 @@
 interface UserProps {
+  //mark these as optional so that if we want to create a new instance of User we dont have to pass these in.
   name?: string;
   age?: number;
 }
