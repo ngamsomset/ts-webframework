@@ -1,5 +1,8 @@
+import axios, { AxiosResponse } from 'axios';
+
 interface UserProps {
   //mark these as optional so that if we want to create a new instance of User we dont have to pass these in.
+  id?: number;
   name?: string;
   age?: number;
 }
@@ -34,5 +37,13 @@ export class User {
     handlers.forEach((cb) => {
       cb();
     });
+  }
+
+  fetch(): void {
+    axios
+      .get(`http://localhost:3000/users/${this.get('id')}`)
+      .then((res: AxiosResponse): void => {
+        this.set(res.data);
+      });
   }
 }
