@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
-
+import { Eventing } from './Eventing';
 interface UserProps {
   //mark these as optional so that if we want to create a new instance of User we dont have to pass these in.
   id?: number;
@@ -7,9 +7,8 @@ interface UserProps {
   age?: number;
 }
 
-type Callback = () => void;
 export class User {
-  events: { [key: string]: Callback[] } = {};
+  public events: Eventing = new Eventing();
 
   constructor(private data: UserProps) {}
 
@@ -19,24 +18,6 @@ export class User {
 
   set(update: UserProps): void {
     Object.assign(this.data, update);
-  }
-
-  on(eventName: string, callback: Callback) {
-    const handlers = this.events[eventName] || [];
-    handlers.push(callback);
-    this.events[eventName] = handlers;
-  }
-
-  trigger(eventName: string): void {
-    const handlers = this.events[eventName];
-
-    if (!handlers || handlers.length === 0) {
-      return;
-    }
-
-    handlers.forEach((cb) => {
-      cb();
-    });
   }
 
   fetch(): void {
