@@ -1,6 +1,7 @@
 import { Eventing } from './Eventing';
 import { Sync } from './Sync';
 import { Attributes } from './Attributes';
+import { AxiosResponse } from 'axios';
 export interface UserProps {
   //mark these as optional so that if we want to create a new instance of User we dont have to pass these in.
   id?: number;
@@ -46,7 +47,7 @@ export class User {
     }
 
     //then call fetch() which is in Sync class then set the data with the return res.
-    this.sync.fetch(id).then((res) => {
+    this.sync.fetch(id).then((res: AxiosResponse): void => {
       this.set(res.data);
     });
   }
