@@ -1,7 +1,7 @@
 import axios, { AxiosPromise } from 'axios';
 
 interface HasId {
-  id: number;
+  id?: number;
 }
 
 //make Sync class to be a generic class so that we can pass any type of value to this class. eg. User, students.

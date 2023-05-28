@@ -1,4 +1,6 @@
 import { Eventing } from './Eventing';
+import { Sync } from './Sync';
+import { Attributes } from './Attributes';
 export interface UserProps {
   //mark these as optional so that if we want to create a new instance of User we dont have to pass these in.
   id?: number;
@@ -6,16 +8,8 @@ export interface UserProps {
   age?: number;
 }
 
+const rootUrl = 'http://localhost:3000/users';
 export class User {
   public events: Eventing = new Eventing();
-
-  constructor(private data: UserProps) {}
-
-  get(propName: string): string | number {
-    return this.data[propName];
-  }
-
-  set(update: UserProps): void {
-    Object.assign(this.data, update);
-  }
+  public sync: Sync<UserProps> = new Sync<UserProps>(rootUrl);
 }
