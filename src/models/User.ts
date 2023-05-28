@@ -37,12 +37,15 @@ export class User {
   }
 
   fetch(): void {
+    //get the id of the user that we want to fetch
     const id = this.get('id');
 
+    //check if id exist.
     if (typeof id !== 'number') {
       throw new Error('ID not exist!');
     }
 
+    //then call fetch() which is in Sync class then set the data with the return res.
     this.sync.fetch(id).then((res) => {
       this.set(res.data);
     });
