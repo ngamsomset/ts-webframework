@@ -8,9 +8,9 @@ export class Attributes<T extends object> {
   //        age?: number;
   // }
   //then get() will return the data of that K(key).
-  get<K extends keyof T>(key: K): T[K] {
+  get = <K extends keyof T>(key: K): T[K] => {
     return this.data[key];
-  }
+  };
 
   set(update: T): void {
     Object.assign(this.data, update);
